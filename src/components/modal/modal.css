@@ -1,0 +1,22 @@
+.modal {
+    padding: 16px 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .modal--rounded {
+    border-radius: 8px;
+  }
+  
+  .modal--small {
+    font-size: 14px;
+  }
+  
+  .modal--medium {
+    font-size: 16px;
+  }
+  
+  .modal--large {
+    font-size: 18px;
+  }
