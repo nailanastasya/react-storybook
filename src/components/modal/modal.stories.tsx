@@ -36,7 +36,7 @@ export const SimpleModal: Story = {
 export const SmallModal: Story = {
   args: {
     type: 'rounded',
-    size: 'small',
+    size: "small",
     children: 'This is a small modal.',
   },
 };
