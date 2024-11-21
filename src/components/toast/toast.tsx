@@ -1,42 +1,50 @@
 import React from 'react';
 
-export interface ToastProps {
+interface ToastProps {
   variant: 'success' | 'danger' | 'warning';
   size: 'small' | 'medium' | 'large';
   type: 'notification' | 'information';
   message: string;
-  description?: string;
+  subMessage?: string;
   time?: string;
-  onClose?: () => void;
 }
 
-const Toast: React.FC<ToastProps> = ({
-  variant,
-  size,
-  type,
-  message,
-  description,
-  time,
-  onClose,
-}) => {
+const Toast: React.FC<ToastProps> = ({ variant, size, type, message, subMessage, time }) => {
+  const baseStyles = `p-4 rounded-lg shadow-md flex items-start space-x-3`;
+
+  const variantStyles = {
+    success: 'bg-green-100 border-green-500 text-green-800',
+    danger: 'bg-red-100 border-red-500 text-red-800',
+    warning: 'bg-yellow-100 border-yellow-500 text-yellow-800',
+  };
+
+  const sizeStyles = {
+    small: 'w-64',
+    medium: 'w-80',
+    large: 'w-96',
+  };
+
+  const icon = {
+    success: '✅',
+    danger: '❌',
+    warning: '⚠️',
+    notification: '🔔',
+    information: 'ℹ️',
+  };
+
   return (
-    <div className={`toast toast--${variant} toast--${size}`}>
-      <div className="toast__icon">
-        {variant === 'success' && '✔'}
-        {variant === 'danger' && '✖'}
-        {variant === 'warning' && '⚠'}
-        {type === 'notification' && '🔔'}
+    <div className="flex justify-center">
+    <div className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]}`}>
+      <div className="flex-shrink-0">
+        <span className="text-xl">{icon[type]}</span>
       </div>
-      <div className="toast__content">
-        <strong className="toast__message">{message}</strong>
-        {description && <p className="toast__description">{description}</p>}
-        {type === 'notification' && time && <p className="toast__time">{time}</p>}
+      <div className="flex-1">
+        <div className="font-bold">{message}</div>
+        {subMessage && <div className="text-sm">{subMessage}</div>}
+        {time && <div className="text-xs text-gray-500">{time}</div>}
       </div>
-      {/* {onClose && (
-        <button className="toast__close" onClick={onClose} aria-label="Close">
-          
-        </button>
-      )} */}
+      <button className="text-gray-600 hover:text-black ml-auto">✖️</button>
+    </div>
     </div>
   );
 };
